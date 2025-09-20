@@ -1,0 +1,8 @@
+moviepy==1.0.3
+yt-dlp
+requests
+beautifulsoup4
+google-api-python-client
+Flask
+voxcpm
+Pillow==9.5.0

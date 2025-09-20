@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Anime Tribute Generator</title>
+    <style>
+        body { font-family: sans-serif; background-color: #121212; color: #e0e0e0; margin: 0; padding: 40px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .container { background-color: #1e1e1e; padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.3); width: 100%; max-width: 700px; }
+        h1 { text-align: center; color: #bb86fc; }
+        textarea { width: 100%; height: 250px; background-color: #2c2c2c; color: #e0e0e0; border: 1px solid #444; border-radius: 4px; padding: 10px; font-size: 16px; margin-bottom: 20px; box-sizing: border-box; }
+        .instructions { font-size: 14px; color: #888; margin-bottom: 20px; line-height: 1.6; }
+        .instructions code { background-color: #333; padding: 2px 5px; border-radius: 3px; font-family: monospace; }
+        .button-container { text-align: center; }
+        button { background-color: #6200ee; color: white; border: none; padding: 15px 30px; font-size: 18px; border-radius: 4px; cursor: pointer; transition: background-color 0.3s; }
+        button:hover { background-color: #3700b3; }
+        .flash-messages { list-style: none; padding: 0; margin-bottom: 20px; }
+        .flash-messages li { background-color: #cf6679; color: #121212; padding: 10px; border-radius: 4px; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Anime Tribute Generator</h1>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="flash-messages">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <div class="instructions">
+            <p>Enter your script below using the specified format. The AI will generate a video based on your input.</p>
+            <p><strong>Format:</strong></p>
+            <p><code>Character Name, The script for this character goes here.</code></p>
+            <p>To add another character, type <code>new character</code> on a new line, followed by the next character's details.</p>
+            <p><strong>Example:</strong></p>
+            <pre><code>Goku, My power is overflowing. I will not let you destroy my world!
+new character
+Vegeta, Kakarot, don't think this is over. The Saiyan race depends on us.</code></pre>
+        </div>
+
+        <form action="{{ url_for('generate') }}" method="post">
+            <textarea name="script_data" placeholder="Enter your script here..."></textarea>
+            <div class="button-container">
+                <button type="submit">Generate Video</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
